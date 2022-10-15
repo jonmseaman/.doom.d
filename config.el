@@ -79,13 +79,9 @@
 
 
 ;; Enable the GUI
-
-
+; Menu bar makes org-mode and other feature much more discoverable.
 (menu-bar-mode 1)
 (scroll-bar-mode 1)
-;; (tool-bar-mode 1)
-;; (setq inhibit-splash-screen nil)
-;; (global-hl-line-mode nil)
 
 (after! org
    (setq org-directory "C:/Users/jonms/Workspace/Notes/Org"
@@ -119,8 +115,11 @@
       (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
       (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
       (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
-      (custom-declare-face '+org-todo-kill  '((t (:inherit (error org-todo)))) ""))
+    )
 
+    ; Pulled from default doom config.
+    ; I simplified it and changed the KILL to look the same as DONE.
+    ; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
 	(setq org-todo-keywords
         '((sequence
            "TODO(t)"  ; A task that needs doing & is ready to do
@@ -131,27 +130,13 @@
            "HOLD(h)"  ; This task is paused/on hold because of me
            "|"
            "DONE(d)"  ; Task successfully completed
-           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
-          (sequence
-           "[ ](T)"   ; A task that needs doing
-           "[/](S)"   ; Task is in progress
-           "[?](W)"   ; Task is being held up or paused
-           "|"
-		   "[-](C)"   ; Task was cancelled.
-           "[X](D)")  ; Task was completed
-          (sequence
-           "|"
-           "OKAY(o)"
-           "YES(y)"
-           "NO(n)"))
+           "KILL(k)" ; Task was cancelled, aborted or is no longer applicable
+         ))
         org-todo-keyword-faces
-        '(("[-]"  . +org-todo-active)
-          ("STRT" . +org-todo-active)
-          ("[?]"  . +org-todo-onhold)
+        '(("STRT" . +org-todo-active)
           ("WAIT" . +org-todo-onhold)
           ("HOLD" . +org-todo-onhold)
           ("PROJ" . +org-todo-project)
-          ("NO"   . +org-todo-cancel)
 		  ))
 )
 
