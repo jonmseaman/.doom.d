@@ -148,3 +148,6 @@
 
 (setq scroll-step 1)
 (setq scroll-margin 7)
+
+(after! org
+  (setq org-image-actual-width 400))
