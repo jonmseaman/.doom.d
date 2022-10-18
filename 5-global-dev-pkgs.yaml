@@ -1,0 +1,143 @@
+---
+- name: install software development packages
+  hosts: all
+  strategy: free
+  become: true
+  become_method: sudo
+  become_user: root
+  tasks:
+    - name: Install pip packages
+      pip:
+        name:
+          - "{{ item }}"
+        umask: "0022"
+        state: latest
+        executable: pip3
+      with_list:
+        - autoflake
+        - autopep8
+        - awscli
+        - awslogs
+        - black
+        - cfn-lint
+        - cmake-language-server
+        - coverage
+        - cpplint
+        - flake8
+        - glances
+        - gnureadline
+        - grip
+        - isort
+        - jedi
+        - jedi-language-server
+        - mccabe
+        - msgpack
+        - nose
+        - pipenv
+        - proselint
+        - ptvsd
+        - pycodestyle
+        - pydocstyle
+        - pyflakes
+        - pylint
+        - pyls-black
+        - pyls-isort
+        - pyls-mypy
+        - pytest
+        - pytest-cov
+        - python-jsonrpc-server
+        - python-lsp-server[all]
+        - rope
+        - yapf
+      ignore_errors: true
+
+    - name: Install ruby gems
+      gem:
+        name: "{{ item }}"
+        state: latest
+        user_install: false
+      with_list:
+        - mdl
+        - reek
+        - rubocop
+        - ruby-lint
+        - rufo
+        - solargraph
+        - standard
+      ignore_errors: true
+
+    - name: Install cpan packages
+      cpanm:
+        name: "{{ item }}"
+        notest: true
+        system_lib: true
+      with_list:
+        - Perl::LanguageServer
+        - Perl::Critic
+        - Perl::Tidy
+      ignore_errors: true
+
+    - name: Install npm packages
+      npm:
+        name: "{{ item }}"
+        global: true
+        state: latest
+      with_list:
+        - '@angular/language-server'
+        - '@angular/language-service'
+        - '@ansible/ansible-language-server'
+        - bash-language-server
+        - cspell
+        - csshint
+        - dockerfile-language-server-nodejs
+        - ember-cli
+        - emmet-ls
+        - eslint
+        - handlebars
+        - javascript-typescript-langserver
+        - js-beautify
+        - js-yaml
+        - jshint
+        - jslint
+        - jsonlint
+        - jwt-cli
+        - lehre
+        - markdownlint
+        - markdownlint-cli
+        - marked
+        - npm-groovy-lint
+        - perli
+        - prettier
+        - proselint
+        - pyright
+        - remark
+        - remark-cli
+        - remark-frontmatter
+        - remark-stringify
+        - semistandard
+        - serverless
+        - standard
+        - stylelint
+        - tern
+        - textlint
+        - tslint
+        - typescript
+        - typescript-formatter
+        - typescript-language-server
+        - unified-language-server
+        - vim-language-server
+        - vscode-langservers-extracted
+        - vue-language-server
+        - wcwidth
+        - yaml-language-server
+        - yarn
+      ignore_errors: true
+
+    - name: Install hadolint for Dockerfiles
+      get_url:
+        url: 'https://github.com/hadolint/hadolint/releases/download/v2.10.0/hadolint-Linux-x86_64'
+        dest: '/usr/local/bin/hadolint'
+        group: root
+        owner: root
+        mode: 0755
+      ignore_errors: true

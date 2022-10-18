@@ -11,7 +11,7 @@
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
-;; https://github.com/radian-software/straight.el#the-recipe-format
+;; https://github.com/raxod502/straight.el#the-recipe-format
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
 
@@ -34,7 +34,7 @@
 
 ;; Specify a `:branch' to install a package from a particular branch or tag.
 ;; This is required for some packages whose default branch isn't 'master' (which
-;; our package manager can't deal with; see radian-software/straight.el#279)
+;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
 ;; Use `:pin' to specify a particular commit to install.
@@ -48,3 +48,50 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+(when (or
+        (not (not (string-match-p "google" (system-name))))
+        (not (not (string-match-p "roam.internal" (system-name)))))
+  (when (eq system-type 'gnu/linux)
+    (let ((default-directory "/usr/share/emacs/site-lisp/emacs-google-config")) (normal-top-level-add-subdirs-to-load-path)))
+  (package! citc :built-in 'prefer)
+  (package! clang-include-fixer :built-in 'prefer)
+  (package! cs :built-in 'prefer)
+  (package! csearch :built-in 'prefer)
+  (package! gogolink :built-in 'prefer)
+  (package! google :built-in 'prefer)
+  (package! google-cc-add-using :built-in 'prefer)
+  (package! google-cc-extras :built-in 'prefer)
+  (package! google-diformat :built-in 'prefer)
+  (package! google-ediff :built-in 'prefer)
+  (package! google-emacs-utilities :built-in 'prefer)
+  (package! google-engdoc :built-in 'prefer)
+  (package! google-findings :built-in 'prefer)
+  (package! google-imports :built-in 'prefer)
+  (package! google-imports-iwyu :built-in 'prefer)
+  (package! google-java-format :built-in 'prefer) ;; 20220225 - adding google-java-format in order to format java code in before-save-hook
+  (package! google-lint :built-in 'prefer)
+  (package! google-platform :built-in 'prefer)
+  (package! google-process :built-in 'prefer)
+  (package! google-pyformat :built-in 'prefer)
+  (package! google-trailing-whitespace :built-in 'prefer)
+  (package! google-tricorder :built-in 'prefer)
+  (package! google3 :built-in 'prefer)
+  (package! google3-build :built-in 'prefer)
+  (package! google3-build-cleaner :built-in 'prefer)
+  (package! google3-build-mode :built-in 'prefer)
+  (package! google3-display-coverage :built-in 'prefer)
+  (package! google3-mode :built-in 'prefer)
+  (package! google3-quickrun :built-in 'prefer)
+  (package! ivy-cs :built-in 'prefer);; 20211103 - ivy-cs used to break doom-emacs' beautiful ivy display, though this appears to have been fixed.
+  (package! java-imports)
+  (package! p4-google :built-in 'prefer)
+  (package! protobuffer :built-in 'prefer)
+  (package! rotate-among-files :built-in 'prefer)
+  ;;(package! google-yasnippets :built-in 'prefer) ;; 2021 - Disable yasnippets because it confuses company autocomplete
+  ;;(package! google-flymake :built-in 'prefer) ;; 2021 - Disable Flymake because I use FlyCheck
+  ;;(package! google3-build-capf :built-in 'prefer) ;; 2021 - CAUTION: build-capf interferes with "value of c-a-p-f" (as observed by company-diag), ends up changing it from "lsp-complete-at-point" to "google3".
+  )
+
+;; 20210721 - LSP needs snippets for placeholders, but the built-in snippets are annoying.
+(package! doom-snippets :ignore t)
