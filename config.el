@@ -84,28 +84,28 @@
 (scroll-bar-mode 1)
 
 (after! org
-   (setq org-directory "C:/Users/jonms/Workspace/Notes/Org"
-      org-agenda-files '("C:/Users/jonms/Workspace/Notes/Org/Inbox.org"
-                         "C:/Users/jonms/Workspace/Notes/Org/Jonathan.org"
-                         "C:/Users/jonms/Workspace/Notes/Org/Actions.org"
-                         "C:/Users/jonms/Workspace/Notes/Org/Tickler.org"
-                         "C:/Users/jonms/Workspace/Notes/Org/Waiting.org")
+   (setq org-directory "~/Workspace/Notes/Org"
+      org-agenda-files '("~/Workspace/Notes/Org/Inbox.org"
+                         "~/Workspace/Notes/Org/Jonathan.org"
+                         "~/Workspace/Notes/Org/Actions.org"
+                         "~/Workspace/Notes/Org/Tickler.org"
+                         "~/Workspace/Notes/Org/Waiting.org")
       org-default-notes-file (expand-file-name "Inbox.org" org-directory)
       org-log-done 'time)
 
     (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                          (file+headline "C:/Users/jonms/Workspace/Notes/Org/Inbox.org" "Tasks")
+                          (file+headline "~/Workspace/Notes/Org/Inbox.org" "Tasks")
                           "* TODO %i%?")
                          ("T" "Tickler" entry
-                          (file+headline "C:/Users/jonms/Workspace/Notes/Org/Tickler.org" "Tickler")
+                          (file+headline "~/Workspace/Notes/Org/Tickler.org" "Tickler")
                           "* %i%? \n %U")))
 
-    (setq org-refile-targets '(("C:/Users/jonms/Workspace/Notes/Org/Jonathan.org" :maxlevel . 3)
-                       ("C:/Users/jonms/Workspace/Notes/Org/LaterMaybe.org" :level . 1)
-                       ("C:/Users/jonms/Workspace/Notes/Org/Waiting.org" :level . 2)
-                       ("C:/Users/jonms/Workspace/Notes/Org/Actions.org" :level . 2)
-                       ("C:/Users/jonms/Workspace/Notes/Org/Archive.org" :maxlevel . 3)
-                       ("C:/Users/jonms/Workspace/Notes/Org/Tickler.org" :maxlevel . 2)))
+    (setq org-refile-targets '(("~/Workspace/Notes/Org/Jonathan.org" :maxlevel . 3)
+                       ("~/Workspace/Notes/Org/LaterMaybe.org" :level . 1)
+                       ("~/Workspace/Notes/Org/Waiting.org" :level . 2)
+                       ("~/Workspace/Notes/Org/Actions.org" :level . 2)
+                       ("~/Workspace/Notes/Org/Archive.org" :maxlevel . 3)
+                       ("~/Workspace/Notes/Org/Tickler.org" :maxlevel . 2)))
 
     (setq org-src-preserve-indentation nil
       org-src-tab-acts-natively t
