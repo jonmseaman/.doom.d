@@ -86,7 +86,7 @@
 (after! org
    (setq org-directory "~/Workspace/Notes/Org"
       org-agenda-files '("~/Workspace/Notes/Org/Inbox.org"
-                         "~/Workspace/Notes/Org/Jonathan.org"
+                         "~/Workspace/Notes/Org/Projects.org"
                          "~/Workspace/Notes/Org/Actions.org"
                          "~/Workspace/Notes/Org/Tickler.org"
                          "~/Workspace/Notes/Org/Waiting.org")
@@ -100,7 +100,7 @@
                           (file+headline "~/Workspace/Notes/Org/Tickler.org" "Tickler")
                           "* %i%? \n %U")))
 
-    (setq org-refile-targets '(("~/Workspace/Notes/Org/Jonathan.org" :maxlevel . 3)
+    (setq org-refile-targets '(("~/Workspace/Notes/Org/Projects.org" :maxlevel . 3)
                        ("~/Workspace/Notes/Org/LaterMaybe.org" :level . 1)
                        ("~/Workspace/Notes/Org/Waiting.org" :level . 2)
                        ("~/Workspace/Notes/Org/Actions.org" :level . 2)
