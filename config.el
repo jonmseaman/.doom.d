@@ -104,7 +104,6 @@
                        ("~/Workspace/Notes/Org/LaterMaybe.org" :level . 1)
                        ("~/Workspace/Notes/Org/Waiting.org" :level . 2)
                        ("~/Workspace/Notes/Org/Actions.org" :level . 2)
-                       ("~/Workspace/Notes/Org/Archive.org" :maxlevel . 3)
                        ("~/Workspace/Notes/Org/Tickler.org" :maxlevel . 2)))
 
     (setq org-src-preserve-indentation nil
