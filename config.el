@@ -147,3 +147,6 @@
 
 (setq scroll-step 1)
 (setq scroll-margin 7)
+
+
+(evil-set-undo-system 'undo-tree)
