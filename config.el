@@ -148,5 +148,5 @@
 (setq scroll-step 1)
 (setq scroll-margin 7)
 
-
-(evil-set-undo-system 'undo-tree)
+; Save open buffers and window positions.
+; (desktop-save-mode 1)
