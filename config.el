@@ -205,9 +205,9 @@
 ;; they are implemented.
 
 ;; General - increase the responsiveness of auto-completion
-(setq company-tooltip-idle-delay 0.2)
-(setq company-idle-delay 0.2)
-(setq company-minimum-prefix-length 2)
+;;(setq company-tooltip-idle-delay 0.2)
+;;(setq company-idle-delay 0.2)
+;;(setq company-minimum-prefix-length 2)
 
 ;; General - use English dictionary for spell checking
 (setq ispell-dictionary "english")
@@ -340,107 +340,107 @@
   (setq go-guru-scope "github.com/HouzuoGuo/..."))
 
 ;; Initialisation for google owned workstation.
-(when (or
-        (not (not (string-match-p "google" (system-name))))
-        (not (not (string-match-p "roam.internal" (system-name)))))
-  (use-package! google)
-  (use-package! google-cc-add-using)
-  (use-package! google-cc-extras)
-  (use-package! google-codemaker :config (google-codemaker-auto-mode 1))
-  (use-package! google-diformat)
-  (use-package! google-ediff)
-  (use-package! google-engdoc :init (google-engdoc-init))
-  (use-package! google-findings)
-  ;; Disable Flymake because I use FlyCheck
-  ;;(use-package! google-flymake)
-  (use-package! google-imports)
-  (use-package! google-imports-iwyu)
-  (use-package! google-java-format)
-  (use-package! google-pyformat)
-  (use-package! google-trailing-whitespace)
-  (use-package! google-tricorder)
-  ;; 20210715 - Disable yasnippets because it confuses company autocomplete
-  ;; (use-package! google-yasnippets :config (google-yasnippets-load))
-  (use-package! google3)
-  (use-package! google3-build :config (setq google3-build-target-method 'blaze))
-  ;; CAUTION: build-capf interferes with "value of c-a-p-f" (as observed by company-diag), ends up changing it from "lsp-complete-at-point" to "google3".
-  ;;(use-package! google3-build-capf :config (google3-build-capf-enable-completions))
-  (use-package! google3-build-cleaner)
-  (use-package! google3-build-mode)
-  (use-package! google3-display-coverage)
-  (use-package! google3-mode)
-  (use-package! google3-quickrun)
-  (use-package! clang-include-fixer)
-  (use-package! cs)
-  (use-package! gogolink)
-  (use-package! java-imports)
-  (use-package! p4-google)
-  ;; 20211103 - ivy-cs used to break doom-emacs' beautiful ivy display, though this appears to have been fixed.
-  (use-package! ivy-cs)
+;;(when (or
+        ;;(not (not (string-match-p "google" (system-name))))
+        ;;(not (not (string-match-p "roam.internal" (system-name)))))
+  ;;;;(use-package! google)
+  ;;;;(use-package! google-cc-add-using)
+  ;;;;(use-package! google-cc-extras)
+  ;;;;(use-package! google-codemaker :config (google-codemaker-auto-mode 1))
+  ;;;;(use-package! google-diformat)
+  ;;;;(use-package! google-ediff)
+  ;;;;(use-package! google-engdoc :init (google-engdoc-init))
+  ;;;;(use-package! google-findings)
+  ;;;; Disable Flymake because I use FlyCheck
+  ;;;;(use-package! google-flymake)
+  ;;;;(use-package! google-imports)
+  ;;;;(use-package! google-imports-iwyu)
+  ;;;;(use-package! google-java-format)
+  ;;;;(use-package! google-pyformat)
+  ;;;;(use-package! google-trailing-whitespace)
+  ;;;;(use-package! google-tricorder)
+  ;;;; 20210715 - Disable yasnippets because it confuses company autocomplete
+  ;;;; (use-package! google-yasnippets :config (google-yasnippets-load))
+  ;;;;(use-package! google3)
+  ;;;;(use-package! google3-build :config (setq google3-build-target-method 'blaze))
+  ;;;; CAUTION: build-capf interferes with "value of c-a-p-f" (as observed by company-diag), ends up changing it from "lsp-complete-at-point" to "google3".
+  ;;;;(use-package! google3-build-capf :config (google3-build-capf-enable-completions))
+  ;;;;(use-package! google3-build-cleaner)
+  ;;;;(use-package! google3-build-mode)
+  ;;;;(use-package! google3-display-coverage)
+  ;;;;(use-package! google3-mode)
+  ;;;;(use-package! google3-quickrun)
+  ;;;;(use-package! clang-include-fixer)
+  ;;;;(use-package! cs)
+  ;;;;(use-package! gogolink)
+  ;;;;(use-package! java-imports)
+  ;;;;(use-package! p4-google)
+  ;;;; 20211103 - ivy-cs used to break doom-emacs' beautiful ivy display, though this appears to have been fixed.
+  ;;;;(use-package! ivy-cs)
 
-  (use-package! protobuffer :config (setq protobuffer-format-before-save t))
-  (set-formatter! 'google-diformat-clang-formatter #'google-diformat-clang-format-changed :modes '(c-mode c++-mode))
-  (set-formatter! 'google-diformat-java-formatter #'google-diformat-google-java-format-changed :modes '(java-mode))
-  (set-formatter! 'google-diformat-python-formatter #'google-diformat-pyformat-changed :modes '((python-mode (not (eq major-mode 'google3-build-mode)))))
-  (set-formatter! 'google-markdown-formatter #'google-mdformat :modes '(markdown-mode))
-  (set-formatter! 'google-tide-clang-formatter #'google-clang-format-file :modes '(tide-mode typescript typescript-mode))
-  (setq +format-on-save-enabled-modes '(c-mode c++-mode java-mode markdown-mode python-mode tide-mode typescript-mode))
+  ;;(use-package! protobuffer :config (setq protobuffer-format-before-save t))
+  ;;(set-formatter! 'google-diformat-clang-formatter #'google-diformat-clang-format-changed :modes '(c-mode c++-mode))
+  ;;(set-formatter! 'google-diformat-java-formatter #'google-diformat-google-java-format-changed :modes '(java-mode))
+  ;;(set-formatter! 'google-diformat-python-formatter #'google-diformat-pyformat-changed :modes '((python-mode (not (eq major-mode 'google3-build-mode)))))
+  ;;(set-formatter! 'google-markdown-formatter #'google-mdformat :modes '(markdown-mode))
+  ;;(set-formatter! 'google-tide-clang-formatter #'google-clang-format-file :modes '(tide-mode typescript typescript-mode))
+  ;;(setq +format-on-save-enabled-modes '(c-mode c++-mode java-mode markdown-mode python-mode tide-mode typescript-mode))
 
-  (add-hook! 'ediff-keymap-setup-hook :append #'add-d-to-ediff-mode-map)
-  ;; 20210715 - java-imports-scan-file throws an error: File mode specification error: (doom-hook-error java-mode-hook java-imports-scan-file (error Bad bounding indices: 1, nil))
-  ;; 20220225 - java-imports-scan-file no longer throws the error, it now works.
-  (add-hook! 'java-mode-hook 'java-imports-scan-file)
-  ;; 20220225 - this is the recommended way to auto-format java code on save, according to google_java_format.
-  (add-hook! 'java-mode-hook #'(lambda () (add-hook 'before-save-hook #'google-diformat-google-java-format-changed nil :local)))
-  (add-hook! c++-mode (add-hook! 'before-save-hook :local :append #'google-clang-format-file nil :local))
-  ;; 20210715 - I personally do not prefer subword mode
-  ;; (add-hook! google3-mode 'subword-mode)
-  (add-hook! markdown-mode (add-hook! 'before-save-hook :local :append #'google-mdformat-before-save))
-  (add-hook! python-mode (add-hook! 'before-save-hook :local :append (lambda () (unless (eq major-mode 'google3-build-mode) (add-hook 'before-save-hook #'google-pyformat nil t)))))
-  (add-hook! tide-mode (add-hook! 'before-save-hook :local :append #'google-clang-format-file))
-  (add-hook! typescript-mode (add-hook! 'before-save-hook :local :append #'google-diformat-clang-format-changed))
+  ;;(add-hook! 'ediff-keymap-setup-hook :append #'add-d-to-ediff-mode-map)
+  ;;;; 20210715 - java-imports-scan-file throws an error: File mode specification error: (doom-hook-error java-mode-hook java-imports-scan-file (error Bad bounding indices: 1, nil))
+  ;;;; 20220225 - java-imports-scan-file no longer throws the error, it now works.
+  ;;(add-hook! 'java-mode-hook 'java-imports-scan-file)
+  ;;;; 20220225 - this is the recommended way to auto-format java code on save, according to google_java_format.
+  ;;(add-hook! 'java-mode-hook #'(lambda () (add-hook 'before-save-hook #'google-diformat-google-java-format-changed nil :local)))
+  ;;(add-hook! c++-mode (add-hook! 'before-save-hook :local :append #'google-clang-format-file nil :local))
+  ;;;; 20210715 - I personally do not prefer subword mode
+  ;;;; (add-hook! google3-mode 'subword-mode)
+  ;;(add-hook! markdown-mode (add-hook! 'before-save-hook :local :append #'google-mdformat-before-save))
+  ;;(add-hook! python-mode (add-hook! 'before-save-hook :local :append (lambda () (unless (eq major-mode 'google3-build-mode) (add-hook 'before-save-hook #'google-pyformat nil t)))))
+  ;;(add-hook! tide-mode (add-hook! 'before-save-hook :local :append #'google-clang-format-file))
+  ;;(add-hook! typescript-mode (add-hook! 'before-save-hook :local :append #'google-diformat-clang-format-changed))
 
-  (if (eq system-type 'gnu/linux)
-    ;; The LSP runs locally on a Linux host.
-    (progn
-      (with-eval-after-load 'lsp-mode
-        (add-to-list 'lsp-language-id-configuration '(borg-mode . "borg"))
-        ;; 20220119 - make LSP recognise borg-mode and BUILD files, otherwise LSP will not initialise and complain that it cannot find an "active workspace".
-        (add-to-list 'lsp-language-id-configuration '(google3-build-mode . "BUILD"))
-        (add-to-list 'lsp-language-id-configuration '(ncl-mode . ".blueprint"))
-        (add-to-list 'lsp-language-id-configuration '(piccolo-mode . ".pi"))
-        (add-to-list 'lsp-language-id-configuration '(protobuf-mode . ".proto"))
-        ;; 20220804 - edit METADATA in protobuffer mode (which differs from protobuf mode).
-        (add-to-list 'lsp-language-id-configuration '(protobuffer-mode . "METADATA"))
-        (add-to-list 'lsp-language-id-configuration '(skylark-mode . ".bzl"))
-        ;; When opening a go project from /google, replace the gopls LSP (at the default priority) with cider also at the default priority.
-        (when (or (string-prefix-p "/google" (buffer-file-name)) (string-prefix-p "/Volumes/google" (buffer-file-name)))
-          (lsp-register-client
-            (make-lsp-client
-             :priority 0
-             :new-connection (lsp-stdio-connection '("/google/bin/releases/cider/ciderlsp/ciderlsp" "--noforward_sync_responses" "--tooltag=remote-emacs-eglot" "--request_options=enable_placeholders"))
-             :major-modes '(borg-mode c-mode cc-mode c++-mode go-mode google3-build-mode java-mode markdown-mode ncl-mode piccolo-mode protobuf-mode protobuffer-mode python-mode skylark-mode tide-mode typescript-mode)
-             :server-id 'ciderlsp-local)))))
-    ;; On other OSes, use LSP over an SSH connection.
-    (progn
-      (with-eval-after-load 'lsp-mode
-        (add-to-list 'lsp-language-id-configuration '(borg-mode . "borg"))
-        ;; 20220119 - make LSP recognise borg-mode and BUILD files, otherwise LSP will not initialise and complain that it cannot find an "active workspace".
-        (add-to-list 'lsp-language-id-configuration '(google3-build-mode . "BUILD"))
-        (add-to-list 'lsp-language-id-configuration '(ncl-mode . ".blueprint"))
-        (add-to-list 'lsp-language-id-configuration '(piccolo-mode . ".pi"))
-        (add-to-list 'lsp-language-id-configuration '(protobuf-mode . ".proto"))
-        ;; 20220804 - edit METADATA in protobuffer mode (which differs from protobuf mode).
-        (add-to-list 'lsp-language-id-configuration '(protobuffer-mode . "METADATA"))
-        (add-to-list 'lsp-language-id-configuration '(skylark-mode . ".bzl"))
-        ;; When opening a go project from /google, replace the gopls LSP (at the default priority) with cider also at the default priority.
-        (when (or (string-prefix-p "/google" (buffer-file-name)) (string-prefix-p "/Volumes/google" (buffer-file-name)))
-          (lsp-register-client
-            (make-lsp-client
-             :priority 0
-             :new-connection (lsp-stdio-connection '("ssh" "ws" "/google/bin/releases/cider/ciderlsp/ciderlsp --noforward_sync_responses --tooltag=remote-emacs-eglot" "--request_options=enable_placeholders"))
-             :major-modes '(borg-mode c-mode cc-mode c++-mode go-mode google3-build-mode java-mode markdown-mode ncl-mode piccolo-mode protobuf-mode protobuffer-mode python-mode skylark-mode tide-mode typescript-mode)
-             :server-id 'ciderlsp-over-ssh)))))))
+  ;;(if (eq system-type 'gnu/linux)
+    ;;;; The LSP runs locally on a Linux host.
+    ;;(progn
+      ;;(with-eval-after-load 'lsp-mode
+        ;;(add-to-list 'lsp-language-id-configuration '(borg-mode . "borg"))
+        ;;;; 20220119 - make LSP recognise borg-mode and BUILD files, otherwise LSP will not initialise and complain that it cannot find an "active workspace".
+        ;;(add-to-list 'lsp-language-id-configuration '(google3-build-mode . "BUILD"))
+        ;;(add-to-list 'lsp-language-id-configuration '(ncl-mode . ".blueprint"))
+        ;;(add-to-list 'lsp-language-id-configuration '(piccolo-mode . ".pi"))
+        ;;(add-to-list 'lsp-language-id-configuration '(protobuf-mode . ".proto"))
+        ;;;; 20220804 - edit METADATA in protobuffer mode (which differs from protobuf mode).
+        ;;(add-to-list 'lsp-language-id-configuration '(protobuffer-mode . "METADATA"))
+        ;;(add-to-list 'lsp-language-id-configuration '(skylark-mode . ".bzl"))
+        ;;;; When opening a go project from /google, replace the gopls LSP (at the default priority) with cider also at the default priority.
+        ;;(when (or (string-prefix-p "/google" (buffer-file-name)) (string-prefix-p "/Volumes/google" (buffer-file-name)))
+          ;;(lsp-register-client
+            ;;(make-lsp-client
+             ;;:priority 0
+             ;;:new-connection (lsp-stdio-connection '("/google/bin/releases/cider/ciderlsp/ciderlsp" "--noforward_sync_responses" "--tooltag=remote-emacs-eglot" "--request_options=enable_placeholders"))
+             ;;:major-modes '(borg-mode c-mode cc-mode c++-mode go-mode google3-build-mode java-mode markdown-mode ncl-mode piccolo-mode protobuf-mode protobuffer-mode python-mode skylark-mode tide-mode typescript-mode)
+             ;;:server-id 'ciderlsp-local)))))
+    ;;;; On other OSes, use LSP over an SSH connection.
+    ;;(progn
+      ;;(with-eval-after-load 'lsp-mode
+        ;;(add-to-list 'lsp-language-id-configuration '(borg-mode . "borg"))
+        ;;;; 20220119 - make LSP recognise borg-mode and BUILD files, otherwise LSP will not initialise and complain that it cannot find an "active workspace".
+        ;;(add-to-list 'lsp-language-id-configuration '(google3-build-mode . "BUILD"))
+        ;;(add-to-list 'lsp-language-id-configuration '(ncl-mode . ".blueprint"))
+        ;;(add-to-list 'lsp-language-id-configuration '(piccolo-mode . ".pi"))
+        ;;(add-to-list 'lsp-language-id-configuration '(protobuf-mode . ".proto"))
+        ;;;; 20220804 - edit METADATA in protobuffer mode (which differs from protobuf mode).
+        ;;(add-to-list 'lsp-language-id-configuration '(protobuffer-mode . "METADATA"))
+        ;;(add-to-list 'lsp-language-id-configuration '(skylark-mode . ".bzl"))
+        ;;;; When opening a go project from /google, replace the gopls LSP (at the default priority) with cider also at the default priority.
+        ;;(when (or (string-prefix-p "/google" (buffer-file-name)) (string-prefix-p "/Volumes/google" (buffer-file-name)))
+          ;;(lsp-register-client
+            ;;(make-lsp-client
+             ;;:priority 0
+             ;;:new-connection (lsp-stdio-connection '("ssh" "ws" "/google/bin/releases/cider/ciderlsp/ciderlsp --noforward_sync_responses --tooltag=remote-emacs-eglot" "--request_options=enable_placeholders"))
+             ;;:major-modes '(borg-mode c-mode cc-mode c++-mode go-mode google3-build-mode java-mode markdown-mode ncl-mode piccolo-mode protobuf-mode protobuffer-mode python-mode skylark-mode tide-mode typescript-mode)
+             ;;:server-id 'ciderlsp-over-ssh)))))))
 
 (map!
   (:leader
