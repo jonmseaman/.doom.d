@@ -150,3 +150,7 @@
 
 ; Save open buffers and window positions.
 ; (desktop-save-mode 1)
+
+
+; Always use unix line endings
+(setq-default buffer-file-coding-system 'utf-8-unix)
