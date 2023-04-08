@@ -75,9 +75,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-
-
-
 ;; Enable the GUI
 ; Menu bar makes org-mode and other feature much more discoverable.
 (menu-bar-mode 1)
@@ -85,26 +82,18 @@
 
 (after! org
    (setq org-directory "~/Notes/Org"
-      org-agenda-files '("~/Notes/Org/Inbox.org"
-                         "~/Notes/Org/Projects.org"
-                         "~/Notes/Org/Actions.org"
-                         "~/Notes/Org/Tickler.org"
-                         "~/Notes/Org/Waiting.org")
-      org-default-notes-file (expand-file-name "Inbox.org" org-directory)
+      org-agenda-files '("~/Notes/Org/Projects.org"
+                         "~/Notes/Org/Actions.org")
+      org-default-notes-file (expand-file-name "Actions.org" org-directory)
       org-log-done 'time)
 
-    (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                          (file+headline "~/Notes/Org/Inbox.org" "Tasks")
+    (setq org-capture-templates '(("t" "Todo [INBOX in Actions.org]" entry
+                          (file+headline "~/Notes/Org/Actions.org" "INBOX")
                           "* TODO %i%?")
-                         ("T" "Tickler" entry
-                          (file+headline "~/Notes/Org/Tickler.org" "Tickler")
-                          "* %i%? \n %U")))
+                         ))
 
     (setq org-refile-targets '(("~/Notes/Org/Projects.org" :maxlevel . 3)
-                       ("~/Notes/Org/LaterMaybe.org" :level . 1)
-                       ("~/Notes/Org/Waiting.org" :level . 2)
-                       ("~/Notes/Org/Actions.org" :level . 2)
-                       ("~/Notes/Org/Tickler.org" :maxlevel . 2)))
+                       ("~/Notes/Org/Actions.org" :level . 2)))
 
     (setq org-src-preserve-indentation nil
       org-src-tab-acts-natively t
@@ -150,7 +139,6 @@
 
 ; Save open buffers and window positions.
 ; (desktop-save-mode 1)
-
 
 ; Always use unix line endings
 (setq-default buffer-file-coding-system 'utf-8-unix)
