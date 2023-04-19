@@ -88,7 +88,7 @@
       org-log-done 'time)
 
     (setq org-capture-templates '(("t" "Todo [INBOX in Actions.org]" entry
-                          (file+headline "~/Notes/Org/Actions.org" "INBOX")
+                          (file+headline "~/Notes/Org/Projects.org" "INBOX")
                           "* TODO %i%?")
                          ))
 
