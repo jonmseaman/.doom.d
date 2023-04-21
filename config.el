@@ -87,7 +87,7 @@
       org-default-notes-file (expand-file-name "Actions.org" org-directory)
       org-log-done 'time)
 
-    (setq org-capture-templates '(("t" "Todo [INBOX in Actions.org]" entry
+    (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
                           (file+headline "~/Notes/Org/Projects.org" "INBOX")
                           "* TODO %i%?")
                          ))
@@ -110,21 +110,27 @@
     ; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
 	(setq org-todo-keywords
         '((sequence
-           "TODO(t)"  ; A task that needs doing & is ready to do
-           "PROJ(p)"  ; A project, which usually contains other tasks
-           "LOOP(r)"  ; A recurring task
-           "STRT(s)"  ; A task that is in progress
-           "WAIT(w)"  ; Something external is holding up this task
-           "HOLD(h)"  ; This task is paused/on hold because of me
+           "TODO(t)"        ; A task that needs doing & is ready to do
+           "PROJ(p)"        ; A project, which usually contains other tasks
+           "EPIC(e)"        ; An epic, for agile-esque task management
+           "MILESTONE(m)"   ; An agile milestone
+           "STORY(s)"       ; A story, for software-esque task management
+           "LOOP(r)"        ; A recurring task
+           "PROG(p)"        ; A task that is in progress
+           "WAIT(w)"        ; Something external is holding up this task
+           "HOLD(h)"        ; This task is paused/on hold because of me
            "|"
-           "DONE(d)"  ; Task successfully completed
-           "KILL(k)" ; Task was cancelled, aborted or is no longer applicable
+           "DONE(d)"        ; Task successfully completed
+           "KILL(k)"        ; Task was cancelled, aborted or is no longer applicable
          ))
         org-todo-keyword-faces
-        '(("STRT" . +org-todo-active)
+        '(("PROG" . +org-todo-active)
           ("WAIT" . +org-todo-onhold)
           ("HOLD" . +org-todo-onhold)
           ("PROJ" . +org-todo-project)
+          ("EPIC" . +org-todo-project)
+          ("MILESTONE" . +org-todo-project)
+          ("STORY" . +org-todo-project)
 		  ))
 )
 
