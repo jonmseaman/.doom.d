@@ -81,48 +81,48 @@
 (scroll-bar-mode 1)
 
 (after! org
-   (setq org-directory "~/Notes/Org"
-      org-agenda-files '("~/Notes/Org/Projects.org"
-                         "~/Notes/Org/Actions.org")
-      org-default-notes-file (expand-file-name "Actions.org" org-directory)
-      org-log-done 'time)
+  (setq org-directory "~/Notes/Org"
+        org-agenda-files '("~/Notes/Org/Projects.org"
+                           "~/Notes/Org/Actions.org")
+        org-default-notes-file (expand-file-name "Actions.org" org-directory)
+        org-log-done 'time)
 
-    (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
-                          (file+headline "~/Notes/Org/Projects.org" "INBOX")
-                          "* TODO %i%?")
-                         ))
+  (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
+                                 (file+headline "~/Notes/Org/Projects.org" "INBOX")
+                                 "* TODO %i%?")
+                                ))
 
-    (setq org-refile-targets '(("~/Notes/Org/Projects.org" :maxlevel . 3)
-                       ("~/Notes/Org/Actions.org" :level . 2)))
+  (setq org-refile-targets '(("~/Notes/Org/Projects.org" :maxlevel . 3)
+                             ("~/Notes/Org/Actions.org" :level . 2)))
 
-    (setq org-src-preserve-indentation nil
-      org-src-tab-acts-natively t
-      org-edit-src-content-indentation 0)
+  (setq org-src-preserve-indentation nil
+        org-src-tab-acts-natively t
+        org-edit-src-content-indentation 0)
 
-    (with-no-warnings
-      (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
-      (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
-      (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
+  (with-no-warnings
+    (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
+    (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
+    (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
     )
 
-    ; Pulled from default doom config.
-    ; I simplified it and changed the KILL to look the same as DONE.
-    ; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
-	(setq org-todo-keywords
+                                        ; Pulled from default doom config.
+                                        ; I simplified it and changed the KILL to look the same as DONE.
+                                        ; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
+  (setq org-todo-keywords
         '((sequence
-           "TODO(t)"        ; A task that needs doing & is ready to do
-           "PROJ(p)"        ; A project, which usually contains other tasks
-           "EPIC(e)"        ; An epic, for agile-esque task management
-           "MILESTONE(m)"   ; An agile milestone
-           "STORY(s)"       ; A story, for software-esque task management
-           "LOOP(r)"        ; A recurring task
-           "PROG(p)"        ; A task that is in progress
-           "WAIT(w)"        ; Something external is holding up this task
-           "HOLD(h)"        ; This task is paused/on hold because of me
+           "TODO(t)"             ; A task that needs doing & is ready to do
+           "PROJ(p)"             ; A project, which usually contains other tasks
+           "EPIC(e)"             ; An epic, for agile-esque task management
+           "MILESTONE(m)"        ; An agile milestone
+           "STORY(s)"            ; A story, for software-esque task management
+           "LOOP(r)"             ; A recurring task
+           "PROG(p)"             ; A task that is in progress
+           "WAIT(w)"             ; Something external is holding up this task
+           "HOLD(h)"             ; This task is paused/on hold because of me
            "|"
-           "DONE(d)"        ; Task successfully completed
-           "KILL(k)"        ; Task was cancelled, aborted or is no longer applicable
-         ))
+           "DONE(d)"    ; Task successfully completed
+           "KILL(k)"    ; Task was cancelled, aborted or is no longer applicable
+           ))
         org-todo-keyword-faces
         '(("PROG" . +org-todo-active)
           ("WAIT" . +org-todo-onhold)
@@ -132,7 +132,76 @@
           ("MILESTONE" . +org-todo-project)
           ("STORY" . +org-todo-project)
 		  ))
-)
+
+  (setq org-agenda-custom-commands
+        '(
+          ("o" "Agenda Current Work"
+           (
+            ;; Today view.
+            (agenda ""
+                    ((org-agenda-span 1)
+                     (org-deadline-warning-days 0)
+                     (org-agenda-block-separator nil)
+                     (org-scheduled-past-days 0)
+                     ;; We don't need the `org-agenda-date-today'
+                     ;; highlight because that only has a practical
+                     ;; utility in multi-day views.
+                     (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                     (org-agenda-format-date "%A %-e %B %Y")
+                     (org-agenda-overriding-header "\nToday's agenda\n")))
+            ;; Current Projects
+            (tags-todo "active"
+                       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("TODO")))
+                        (org-agenda-overriding-header "\nCurrent Projects\n")
+                        )
+                       )
+            ;; Current Projects
+            (tags-todo "active"
+                       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" )))
+                        (org-agenda-overriding-header "\nCurrent Tasks\n"))
+                       )
+            ;; Today
+            (agenda "" ((org-agenda-span 1)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-block-separator nil)
+                        (org-scheduled-past-days 0)
+                        ;; We don't need the `org-agenda-date-today'
+                        ;; highlight because that only has a practical
+                        ;; utility in multi-day views.
+                        (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                        (org-agenda-format-date "%A %-e %B %Y")
+                        (org-agenda-overriding-header "\nToday's agenda\n")))
+            ;; Upcoming (3 day)
+            (agenda "" ((org-agenda-start-on-weekday nil)
+                        (org-agenda-start-day "+1d")
+                        (org-agenda-span 3)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-block-separator nil)
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                        (org-agenda-overriding-header "\nNext three days\n")))
+            ;; Upcoming (14 day)
+            (agenda "" ((org-agenda-time-grid nil)
+                        (org-agenda-start-on-weekday nil)
+                        ;; We don't want to replicate the previous section's
+                        ;; three days, so we start counting from the day after.
+                        (org-agenda-start-day "+4d")
+                        (org-agenda-span 14)
+                        (org-agenda-show-all-dates nil)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-block-separator nil)
+                        (org-agenda-entry-types '(:deadline))
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                        (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))
+          ;; TODO: Make a review mode
+          ;; - Stuck projects
+          ;; - Later/maybe
+          ;; - Inbox
+          ;; - etc...
+          )
+        )
+  )
+
+
 
 
 (use-package! org-mouse
