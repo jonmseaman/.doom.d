@@ -82,18 +82,21 @@
 
 (after! org
   (setq org-directory "~/Notes/Org"
-        org-agenda-files '("~/Notes/Org/Projects.org"
-                           "~/Notes/Org/Actions.org")
+        org-agenda-files '("~/Notes/Org/Actions.org"
+                           "~/Notes/Org/Projects.org")
         org-default-notes-file (expand-file-name "Actions.org" org-directory)
-        org-log-done 'time)
+        org-log-done 'time
+        org-agenda-start-with-follow-mode t
+        org-agenda-follow-indirect t
+        )
 
   (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
                                  (file+headline "~/Notes/Org/Projects.org" "INBOX")
                                  "* TODO %i%?")
                                 ))
 
-  (setq org-refile-targets '(("~/Notes/Org/Projects.org" :maxlevel . 3)
-                             ("~/Notes/Org/Actions.org" :level . 2)))
+  (setq org-refile-targets '(("~/Notes/Org/Actions.org" :level . 2)
+                             ("~/Notes/Org/Projects.org" :maxlevel . 3)))
 
   (setq org-src-preserve-indentation nil
         org-src-tab-acts-natively t
@@ -105,16 +108,16 @@
     (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
     )
 
-                                        ; Pulled from default doom config.
-                                        ; I simplified it and changed the KILL to look the same as DONE.
-                                        ; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
+; Pulled from default doom config.
+; I simplified it and changed the KILL to look the same as DONE.
+; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
   (setq org-todo-keywords
         '((sequence
-           "TODO(t)"             ; A task that needs doing & is ready to do
            "PROJ(p)"             ; A project, which usually contains other tasks
            "EPIC(e)"             ; An epic, for agile-esque task management
            "MILESTONE(m)"        ; An agile milestone
            "STORY(s)"            ; A story, for software-esque task management
+           "TODO(t)"             ; A task that needs doing & is ready to do
            "LOOP(r)"             ; A recurring task
            "PROG(p)"             ; A task that is in progress
            "WAIT(w)"             ; Something external is holding up this task
@@ -130,12 +133,14 @@
           ("PROJ" . +org-todo-project)
           ("EPIC" . +org-todo-project)
           ("MILESTONE" . +org-todo-project)
-          ("STORY" . +org-todo-project)
-		  ))
+          ("STORY" . +org-todo-project))
+        )
 
+  ;; org-agenda-custom-commands, partially adopted from:
+  ;; https://protesilaos.com/codelog/2021-12-09-emacs-org-block-agenda/
   (setq org-agenda-custom-commands
         '(
-          ("o" "Agenda Current Work"
+          ("o" "Agenda Current Work Overview"
            (
             ;; Today view.
             (agenda ""
@@ -149,28 +154,6 @@
                      (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
                      (org-agenda-format-date "%A %-e %B %Y")
                      (org-agenda-overriding-header "\nToday's agenda\n")))
-            ;; Current Projects
-            (tags-todo "active"
-                       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("TODO")))
-                        (org-agenda-overriding-header "\nCurrent Projects\n")
-                        )
-                       )
-            ;; Current Projects
-            (tags-todo "active"
-                       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" )))
-                        (org-agenda-overriding-header "\nCurrent Tasks\n"))
-                       )
-            ;; Today
-            (agenda "" ((org-agenda-span 1)
-                        (org-deadline-warning-days 0)
-                        (org-agenda-block-separator nil)
-                        (org-scheduled-past-days 0)
-                        ;; We don't need the `org-agenda-date-today'
-                        ;; highlight because that only has a practical
-                        ;; utility in multi-day views.
-                        (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
-                        (org-agenda-format-date "%A %-e %B %Y")
-                        (org-agenda-overriding-header "\nToday's agenda\n")))
             ;; Upcoming (3 day)
             (agenda "" ((org-agenda-start-on-weekday nil)
                         (org-agenda-start-day "+1d")
@@ -191,12 +174,35 @@
                         (org-agenda-block-separator nil)
                         (org-agenda-entry-types '(:deadline))
                         (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                        (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))
-          ;; TODO: Make a review mode
+                        (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))
+            ;; Current Tasks
+            (tags-todo "active"
+                       ((org-agenda-hide-tags-regexp "active")
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "PROG" "LOOP")))
+                        (org-agenda-overriding-header "\nCurrent Tasks\n"))
+                       )
+            ;; Current Projects
+            (tags-todo "active"
+                       ((org-agenda-hide-tags-regexp "active")
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("PROJ" "EPIC" "MILESTONE" "STORY")))
+                        (org-agenda-overriding-header "\nCurrent Projects\n")
+                        )
+                       )
+            ))
+
+          ;; TODO: Make a review mode. This should include:
           ;; - Stuck projects
           ;; - Later/maybe
           ;; - Inbox
           ;; - etc...
+          ("r" "Review List" ;; WIP Reviewe List
+           (
+            (tags-todo "-active"
+                       (
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("WAIT")))
+                        (org-agenda-overriding-header "\nWaiting List\n")
+                        )
+                       )))
           )
         )
   )
