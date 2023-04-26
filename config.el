@@ -144,7 +144,9 @@
            (
             ;; Today view.
             (agenda ""
-                    ((org-agenda-span 1)
+                    ((org-agenda-start-on-weekday nil)
+                     (org-agenda-start-day "+0d")
+                     (org-agenda-span 1)
                      (org-deadline-warning-days 0)
                      (org-agenda-block-separator nil)
                      (org-scheduled-past-days 0)
