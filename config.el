@@ -74,9 +74,9 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-
 ;; Enable the GUI
-; Menu bar makes org-mode and other feature much more discoverable.
+
+;; Menu bar makes org-mode and other feature much more discoverable.
 (menu-bar-mode 1)
 (scroll-bar-mode 1)
 
@@ -143,19 +143,18 @@
           ("o" "Agenda Current Work Overview"
            (
             ;; Today view.
-            (agenda ""
-                    ((org-agenda-start-on-weekday nil)
-                     (org-agenda-start-day "+0d")
-                     (org-agenda-span 1)
-                     (org-deadline-warning-days 0)
-                     (org-agenda-block-separator nil)
-                     (org-scheduled-past-days 0)
-                     ;; We don't need the `org-agenda-date-today'
-                     ;; highlight because that only has a practical
-                     ;; utility in multi-day views.
-                     (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
-                     (org-agenda-format-date "%A %-e %B %Y")
-                     (org-agenda-overriding-header "\nToday's agenda\n")))
+            (agenda "" ((org-agenda-start-on-weekday nil)
+                        (org-agenda-start-day "+0d")
+                        (org-agenda-span 1)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-block-separator nil)
+                        (org-scheduled-past-days 0)
+                        ;; We don't need the `org-agenda-date-today'
+                        ;; highlight because that only has a practical
+                        ;; utility in multi-day views.
+                        (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                        (org-agenda-format-date "%A %-e %B %Y")
+                        (org-agenda-overriding-header "\nToday's agenda\n")))
             ;; Upcoming (3 day)
             (agenda "" ((org-agenda-start-on-weekday nil)
                         (org-agenda-start-day "+1d")
