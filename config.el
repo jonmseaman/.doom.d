@@ -113,13 +113,13 @@
 ; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
   (setq org-todo-keywords
         '((sequence
+           "TODO(t)"             ; A task that needs doing & is ready to do
            "PROJ(p)"             ; A project, which usually contains other tasks
            "EPIC(e)"             ; An epic, for agile-esque task management
            "MILESTONE(m)"        ; An agile milestone
            "STORY(s)"            ; A story, for software-esque task management
-           "TODO(t)"             ; A task that needs doing & is ready to do
-           "LOOP(r)"             ; A recurring task
-           "PROG(p)"             ; A task that is in progress
+           "LOOP(l)"             ; A recurring task
+           "PROG(P)"             ; A task that is in progress
            "WAIT(w)"             ; Something external is holding up this task
            "HOLD(h)"             ; This task is paused/on hold because of me
            "|"
@@ -135,6 +135,8 @@
           ("MILESTONE" . +org-todo-project)
           ("STORY" . +org-todo-project))
         )
+
+  (setq org-stuck-projects '("+LEVEL=2/+PROJ|EPIC|MILESTONE|STORY-DONE|KILL" ("NEXT" "TODO") nil ""))
 
   ;; org-agenda-custom-commands, partially adopted from:
   ;; https://protesilaos.com/codelog/2021-12-09-emacs-org-block-agenda/
@@ -180,8 +182,14 @@
             (tags-todo "active"
                        ((org-agenda-hide-tags-regexp "active")
                         (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "PROG" "LOOP")))
-                        (org-agenda-overriding-header "\nCurrent Tasks\n"))
+                        (org-agenda-overriding-header "\nCurrent Tasks\n")
+                        (org-agenda-dim-blocked-tasks 'invisible)
+                        )
                        )
+            ))
+
+          ("p" "Project List"
+           (
             ;; Current Projects
             (tags-todo "active"
                        ((org-agenda-hide-tags-regexp "active")
@@ -189,22 +197,23 @@
                         (org-agenda-overriding-header "\nCurrent Projects\n")
                         )
                        )
-            ))
+            (stuck))
+           )
 
           ;; TODO: Make a review mode. This should include:
-          ;; - Stuck projects
           ;; - Later/maybe
           ;; - Inbox
           ;; - etc...
           ("r" "Review List" ;; WIP Reviewe List
            (
+            (stuck)
             (tags-todo "-active"
-                       (
-                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("WAIT")))
-                        (org-agenda-overriding-header "\nWaiting List\n")
-                        )
-                       )))
+                       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("WAIT")))
+                        (org-agenda-overriding-header "\nWaiting List\n"))
+            )
+           )
           )
+         )
         )
   )
 
