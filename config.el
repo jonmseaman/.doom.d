@@ -108,9 +108,9 @@
     (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
     )
 
-; Pulled from default doom config.
-; I simplified it and changed the KILL to look the same as DONE.
-; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
+  ;; Pulled from default doom config.
+  ;; I simplified it and changed the KILL to look the same as DONE.
+  ;; https://github.com/doomemacs/doomemacs/blob/7e50f239c46ea17429f159fb543c0d793543c06e/modules/lang/org/config.el
   (setq org-todo-keywords
         '((sequence
            "TODO(t)"             ; A task that needs doing & is ready to do
@@ -134,9 +134,9 @@
           ("EPIC" . +org-todo-project)
           ("MILESTONE" . +org-todo-project)
           ("STORY" . +org-todo-project))
+        
         )
-
-  (setq org-stuck-projects '("+LEVEL=2/+PROJ|EPIC|MILESTONE|STORY-DONE|KILL" ("NEXT" "TODO") nil ""))
+  (setq org-stuck-projects '("+LEVEL=2/+PROJ|EPIC|MILESTONE|STORY-DONE-KILL" ("NEXT" "TODO") nil ""))
 
   ;; org-agenda-custom-commands, partially adopted from:
   ;; https://protesilaos.com/codelog/2021-12-09-emacs-org-block-agenda/
@@ -186,8 +186,8 @@
                         (org-agenda-dim-blocked-tasks 'invisible)
                         )
                        )
-            ))
-
+            )
+           )
           ("p" "Project List"
            (
             ;; Current Projects
@@ -210,15 +210,12 @@
             (tags-todo "-active"
                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("WAIT")))
                         (org-agenda-overriding-header "\nWaiting List\n"))
+                       )
             )
            )
           )
-         )
         )
   )
-
-
-
 
 (use-package! org-mouse
   :custom
@@ -228,8 +225,8 @@
 (setq scroll-step 1)
 (setq scroll-margin 7)
 
-; Save open buffers and window positions.
-; (desktop-save-mode 1)
+;; Save open buffers and window positions.
+;; (desktop-save-mode 1)
 
-; Always use unix line endings
+;; Always use unix line endings
 (setq-default buffer-file-coding-system 'utf-8-unix)
