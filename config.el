@@ -134,7 +134,7 @@
           ("EPIC" . +org-todo-project)
           ("MILESTONE" . +org-todo-project)
           ("STORY" . +org-todo-project))
-        
+
         )
   (setq org-stuck-projects '("+LEVEL=2/+PROJ|EPIC|MILESTONE|STORY-DONE-KILL" ("NEXT" "TODO") nil ""))
 
@@ -145,7 +145,8 @@
           ("o" "Agenda Current Work Overview"
            (
             ;; Today view.
-            (agenda "" ((org-agenda-start-on-weekday nil)
+            (agenda "" ((org-agenda-overriding-header "\nToday's agenda\n")
+                        (org-agenda-start-on-weekday nil)
                         (org-agenda-start-day "+0d")
                         (org-agenda-span 1)
                         (org-deadline-warning-days 0)
@@ -156,17 +157,19 @@
                         ;; utility in multi-day views.
                         (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
                         (org-agenda-format-date "%A %-e %B %Y")
-                        (org-agenda-overriding-header "\nToday's agenda\n")))
+                        ))
             ;; Upcoming (3 day)
-            (agenda "" ((org-agenda-start-on-weekday nil)
+            (agenda "" ((org-agenda-overriding-header "\nNext three days\n")
+                        (org-agenda-start-on-weekday nil)
                         (org-agenda-start-day "+1d")
                         (org-agenda-span 3)
                         (org-deadline-warning-days 0)
                         (org-agenda-block-separator nil)
                         (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                        (org-agenda-overriding-header "\nNext three days\n")))
+                        ))
             ;; Upcoming (14 day)
-            (agenda "" ((org-agenda-time-grid nil)
+            (agenda "" ((org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")
+                        (org-agenda-time-grid nil)
                         (org-agenda-start-on-weekday nil)
                         ;; We don't want to replicate the previous section's
                         ;; three days, so we start counting from the day after.
@@ -177,15 +180,13 @@
                         (org-agenda-block-separator nil)
                         (org-agenda-entry-types '(:deadline))
                         (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                        (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))
+                        ))
             ;; Current Tasks
-            (tags-todo "active"
-                       ((org-agenda-hide-tags-regexp "active")
+            (tags-todo "active" ((org-agenda-overriding-header "\nCurrent Tasks\n")
+                        (org-agenda-hide-tags-regexp "active")
                         (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "PROG" "LOOP")))
-                        (org-agenda-overriding-header "\nCurrent Tasks\n")
                         (org-agenda-dim-blocked-tasks 'invisible)
-                        )
-                       )
+                        ))
             )
            )
           ("p" "Project List"
@@ -221,6 +222,9 @@
   :custom
   (org-mouse-features
    '(context-menu move-tree yank-link activate-stars activate-bullets activate-checkboxes)))
+
+(setq! org-cite-global-bibliography
+ '("~/Notes/Org/bibliography.bib"))
 
 (setq scroll-step 1)
 (setq scroll-margin 7)
