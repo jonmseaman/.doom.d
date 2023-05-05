@@ -234,3 +234,6 @@
 
 ;; Always use unix line endings
 (setq-default buffer-file-coding-system 'utf-8-unix)
+
+;; Save buffers to their real file on auto-save.
+(auto-save-visited-mode +1)
