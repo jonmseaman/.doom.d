@@ -88,6 +88,8 @@
         org-log-done 'time
         org-agenda-start-with-follow-mode t
         org-agenda-follow-indirect t
+        org-agenda-show-future-repeats nil
+        org-todo-repeat-to-state "LOOP"
         )
 
   (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
@@ -184,7 +186,7 @@
             ;; Current Tasks
             (tags-todo "active" ((org-agenda-overriding-header "\nCurrent Tasks\n")
                         (org-agenda-hide-tags-regexp "active")
-                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "PROG" "LOOP")))
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "PROG")))
                         (org-agenda-dim-blocked-tasks 'invisible)
                         ))
             )
