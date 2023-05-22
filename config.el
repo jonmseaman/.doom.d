@@ -40,7 +40,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Notes/Org/")
+(setq org-directory "~/Notes/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -81,9 +81,9 @@
 (scroll-bar-mode 1)
 
 (after! org
-  (setq org-directory "~/Notes/Org"
-        org-agenda-files '("~/Notes/Org/Actions.org"
-                           "~/Notes/Org/Projects.org")
+  (setq org-directory "~/Notes/"
+        org-agenda-files '("~/Notes/Actions.org"
+                           "~/Notes/Projects.org")
         org-default-notes-file (expand-file-name "Actions.org" org-directory)
         org-log-done 'time
         org-agenda-start-with-follow-mode t
@@ -93,12 +93,12 @@
         )
 
   (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
-                                 (file+headline "~/Notes/Org/Projects.org" "INBOX")
+                                 (file+headline "~/Notes/Projects.org" "INBOX")
                                  "* TODO %i%?")
                                 ))
 
-  (setq org-refile-targets '(("~/Notes/Org/Actions.org" :level . 2)
-                             ("~/Notes/Org/Projects.org" :maxlevel . 3)))
+  (setq org-refile-targets '(("~/Notes/Actions.org" :level . 2)
+                             ("~/Notes/Projects.org" :maxlevel . 3)))
 
   (setq org-src-preserve-indentation nil
         org-src-tab-acts-natively t
@@ -226,7 +226,7 @@
    '(context-menu move-tree yank-link activate-stars activate-bullets activate-checkboxes)))
 
 (setq! org-cite-global-bibliography
- '("~/Notes/Org/bibliography.bib"))
+ '("~/Notes/bibliography.bib"))
 
 (setq scroll-step 1)
 (setq scroll-margin 7)
