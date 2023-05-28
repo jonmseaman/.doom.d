@@ -239,3 +239,7 @@
 
 ;; Save buffers to their real file on auto-save.
 (auto-save-visited-mode +1)
+
+;; Make the first frame maximized when starting emacs.
+;; Source: https://emacs.stackexchange.com/questions/2999/how-to-maximize-my-emacs-frame-on-start-up
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
