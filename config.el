@@ -80,10 +80,26 @@
 (menu-bar-mode 1)
 (scroll-bar-mode 1)
 
+
+;; Adapted from: https://stackoverflow.com/questions/17215868/recursively-adding-org-files-in-a-top-level-directory-for-org-agenda-files-take
+
+(defun org-get-agenda-files-recursively (dir)
+  "Get org agenda files from root DIR."
+  (directory-files-recursively dir "\.org$"))
+
+(defun org-set-agenda-files-recursively (dir)
+  "Set org-agenda files from root DIR."
+  (setq org-agenda-files
+    (org-get-agenda-files-recursively dir)))
+
+(defun org-add-agenda-files-recursively (dir)
+  "Add org-agenda files from root DIR."
+  (nconc org-agenda-files
+    (org-get-agenda-files-recursively dir)))
+
 (after! org
   (setq org-directory "~/Notes/"
-        org-agenda-files '("~/Notes/Actions.org"
-                           "~/Notes/Projects.org")
+        org-agenda-files '("~/Notes/Actions.org" "~/Notes/Projects.org")
         org-default-notes-file (expand-file-name "Actions.org" org-directory)
         org-log-done 'time
         org-agenda-start-with-follow-mode t
@@ -93,6 +109,10 @@
         org-agenda-todo-ignore-scheduled 'future
         org-agenda-tags-todo-honor-ignore-options t
         )
+
+  ;; This allows putting your notes directly in a project file and the TODOs
+  ;; will appear in the agenda still.
+  (org-add-agenda-files-recursively "~/Notes/Projects")
 
   (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
                                  (file+headline "~/Notes/Projects.org" "INBOX")
