@@ -267,3 +267,6 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 (+company/toggle-auto-completion)
+
+;; Enables smooth scrolling.
+(pixel-scroll-mode)
