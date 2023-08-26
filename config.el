@@ -270,3 +270,6 @@
 
 ;; Enables smooth scrolling.
 (pixel-scroll-mode)
+
+(find-file "~/Notes/Projects.org")
+(setq initial-buffer-choice "~/Notes/Projects.org")
