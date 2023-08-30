@@ -112,7 +112,7 @@
 
   ;; This allows putting your notes directly in a project file and the TODOs
   ;; will appear in the agenda still.
-  (org-add-agenda-files-recursively "~/Notes/Projects")
+  (org-add-agenda-files-recursively "~/Notes/1_Projects")
 
   (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
                                  (file+headline "~/Notes/Projects.org" "INBOX")
@@ -266,10 +266,27 @@
 ;; Source: https://emacs.stackexchange.com/questions/2999/how-to-maximize-my-emacs-frame-on-start-up
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
+;; Turn auto complete off by default because it is annoying and not generally
+;; needed for note taking.
 (+company/toggle-auto-completion)
 
 ;; Enables smooth scrolling.
 (pixel-scroll-mode)
+
+;; Weekly Notes Function
+(defun goto-weekly-note ()
+  "Create weekly note, or open it if it already exists"
+  (interactive)
+  (setq filename (concat "~/Notes/0_Inbox/" (format-time-string "%Y-Week-%U") ".org"))
+
+   ;; Maybe create the file from a template.
+   (unless (file-exists-p filename)
+       ;; Create file from template.
+       (setq template (format-time-string "* %Y Week %U%n"))
+       (write-region template nil filename))
+
+   (find-file filename))
+
 
 (find-file "~/Notes/Projects.org")
 (setq initial-buffer-choice "~/Notes/Projects.org")
