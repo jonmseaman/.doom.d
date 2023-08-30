@@ -271,7 +271,7 @@
 (+company/toggle-auto-completion)
 
 ;; Enables smooth scrolling.
-(pixel-scroll-mode)
+;; (pixel-scroll-mode) ;; Disabled because it sometimes causes a ton of lag.
 
 ;; Weekly Notes Function
 (defun goto-weekly-note ()
