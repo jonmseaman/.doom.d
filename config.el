@@ -160,7 +160,7 @@
           ("STORY" . +org-todo-project))
 
         )
-  (setq org-stuck-projects '("+LEVEL=2/+PROJ|EPIC|MILESTONE|STORY-DONE-KILL" ("NEXT" "TODO") nil ""))
+  (setq org-stuck-projects '("+active+LEVEL=2/+PROJ|EPIC|MILESTONE|STORY-DONE-KILL" ("NEXT" "TODO") nil ""))
 
   ;; org-agenda-custom-commands, partially adopted from:
   ;; https://protesilaos.com/codelog/2021-12-09-emacs-org-block-agenda/
@@ -211,10 +211,7 @@
                         (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "LOOP" "PROG")))
                         (org-agenda-dim-blocked-tasks 'invisible)
                         ))
-            )
-           )
-          ("p" "Project List"
-           (
+
             ;; Current Projects
             (tags-todo "active"
                        ((org-agenda-hide-tags-regexp "active")
@@ -222,20 +219,10 @@
                         (org-agenda-overriding-header "\nCurrent Projects\n")
                         )
                        )
-            (stuck))
-           )
-
-          ;; TODO: Make a review mode. This should include:
-          ;; - Later/maybe
-          ;; - Inbox
-          ;; - etc...
-          ("r" "Review List" ;; WIP Reviewe List
-           (
             (stuck)
-            (tags-todo "-active"
+            (tags-todo "active"
                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("WAIT")))
-                        (org-agenda-overriding-header "\nWaiting List\n"))
-                       )
+                        (org-agenda-overriding-header "\nWaiting List\n")))
             )
            )
           )
