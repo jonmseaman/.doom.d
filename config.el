@@ -114,9 +114,13 @@
   ;; will appear in the agenda still.
   (org-add-agenda-files-recursively "~/Notes/1_Projects")
 
-  (setq org-capture-templates '(("t" "Todo [INBOX in Projects.org]" entry
-                                 (file+headline "~/Notes/Projects.org" "INBOX")
+  (setq org-capture-templates '(("n" "Note [INBOX in Quick Notes.org]" entry
+                                 (file+headline "~/Notes/0_Inbox/Quick Notes.org" "INBOX")
+                                 "* %i%?")
+                                ("t" "Todo [INBOX in Quick Notes.org]" entry
+                                 (file+headline "~/Notes/0_Inbox/Quick Notes.org" "INBOX")
                                  "* TODO %i%?")
+
                                 ))
 
   (setq org-refile-targets '(("~/Notes/Actions.org" :level . 2)
