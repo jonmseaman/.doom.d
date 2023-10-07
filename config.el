@@ -255,7 +255,7 @@
 
 ;; Make the first frame maximized when starting emacs.
 ;; Source: https://emacs.stackexchange.com/questions/2999/how-to-maximize-my-emacs-frame-on-start-up
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;;(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; Turn auto complete off by default because it is annoying and not generally
 ;; needed for note taking.
