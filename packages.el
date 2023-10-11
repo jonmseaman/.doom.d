@@ -56,3 +56,6 @@
 (package! with-editor
           :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab"
           :recipe (:host github :repo "magit/with-editor"))
+
+(package! org-super-links
+          :recipe (:host github :repo "toshism/org-super-links" :branch "develop"))
