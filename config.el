@@ -115,10 +115,10 @@
   (org-add-agenda-files-recursively "~/Notes/1_Projects")
 
   (setq org-capture-templates '(("n" "Note [INBOX in Quick Notes.org]" entry
-                                 (file+headline "~/Notes/0_Inbox/Quick Notes.org" "INBOX")
+                                 (file+headline "~/Notes/Notes.org" "INBOX")
                                  "* %i%?")
                                 ("t" "Todo [INBOX in Quick Notes.org]" entry
-                                 (file+headline "~/Notes/0_Inbox/Quick Notes.org" "INBOX")
+                                 (file+headline "~/Notes/Notes.org" "INBOX")
                                  "* TODO %i%?")
 
                                 ))
@@ -231,8 +231,6 @@
            )
           )
         )
-
-
   )
 
 (use-package! org-super-links
@@ -240,7 +238,6 @@
   :bind (("C-c s s" . org-super-links-link)
          ("C-c s l" . org-super-links-store-link)
          ("C-c s C-l" . org-super-links-insert-link)))
-
 
 (use-package! org-mouse
   :custom
