@@ -115,10 +115,10 @@
   (org-add-agenda-files-recursively "~/Notes/1_Projects")
 
   (setq org-capture-templates '(("n" "Note [INBOX in Quick Notes.org]" entry
-                                 (file+headline "~/Notes/Notes.org" "INBOX")
+                                 (file+headline "~/Notes/Quick Notes.org" "INBOX")
                                  "* %i%?")
                                 ("t" "Todo [INBOX in Quick Notes.org]" entry
-                                 (file+headline "~/Notes/Notes.org" "INBOX")
+                                 (file+headline "~/Notes/Quick Notes.org" "INBOX")
                                  "* TODO %i%?")
 
                                 ))
