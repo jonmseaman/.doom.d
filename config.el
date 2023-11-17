@@ -110,6 +110,10 @@
         org-agenda-tags-todo-honor-ignore-options t
         )
 
+  ;; Configure org-roam
+  ;; (make-directory "~/Notes/3_Reference")
+  ;; (setq org-roam-directory (file-truename "~/Notes/3_Reference"))
+
   ;; This allows putting your notes directly in a project file and the TODOs
   ;; will appear in the agenda still.
   (org-add-agenda-files-recursively "~/Notes/1_Projects")
