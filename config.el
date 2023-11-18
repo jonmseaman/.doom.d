@@ -237,6 +237,11 @@
         )
   )
 
+;; org-id-link-to-org-user-id causes org-super-links to use ids rather than the
+;; path to the linked note, which makes it easier to maintain.
+;; The command org-id-update-id-locations will then be able to update all ids.
+(require 'org-id)
+(setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
 (use-package! org-super-links
   :custom (org-super-links :type git :host github :repo "toshism/org-super-links" :branch "develop")
   :bind (("C-c s s" . org-super-links-link)
