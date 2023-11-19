@@ -293,6 +293,22 @@
 
    (find-file filename))
 
+(defun insert-org-journal-entry ()
+  "Inserts a journal entry into the current file."
+  (interactive)
+
+  (setq datetimestr (format-time-string "%a %b %e %R %Y"))
+  (insert "* Title\n"
+          ":PROPERTIES:\n"
+          ":CREATED: " datetimestr "\n"
+          ":END:\n"
+          "\n"
+          "\n"
+          "** References\n"
+          "-\n")
+
+
+  )
 
 (find-file "~/Notes/Projects.org")
 (setq initial-buffer-choice "~/Notes/Projects.org")
