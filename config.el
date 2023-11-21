@@ -118,13 +118,22 @@
   ;; will appear in the agenda still.
   (org-add-agenda-files-recursively "~/Notes/1_Projects")
 
-  (setq org-capture-templates '(("n" "Note [INBOX in Quick Notes.org]" entry
+  (setq org-capture-templates `(("n" "Note [INBOX in Quick Notes.org]" entry
                                  (file+headline "~/Notes/Quick Notes.org" "INBOX")
                                  "* %i%?")
                                 ("t" "Todo [INBOX in Quick Notes.org]" entry
                                  (file+headline "~/Notes/Quick Notes.org" "INBOX")
                                  "* TODO %i%?")
-
+                                ("j" "Journal Entry [Journal.org]" entry
+                                 (file "~/Notes/Journal.org")
+                                 ,(concat "* %i%?\n"
+                                          ":PROPERTIES:\n"
+                                          ":CREATED: %<%a %b %e %R %Y>\n"
+                                          ":END:\n"
+                                          "\n"
+                                          "\n"
+                                          "** References\n"
+                                          "-\n") :prepend t)
                                 ))
 
   (setq org-roam-capture-templates '(("d" "default" plain "%?"
@@ -297,23 +306,6 @@
        (write-region template nil filename))
 
    (find-file filename))
-
-(defun insert-org-journal-entry ()
-  "Inserts a journal entry into the current file."
-  (interactive)
-
-  (setq datetimestr (format-time-string "%a %b %e %R %Y"))
-  (insert "* Title\n"
-          ":PROPERTIES:\n"
-          ":CREATED: " datetimestr "\n"
-          ":END:\n"
-          "\n"
-          "\n"
-          "** References\n"
-          "-\n")
-
-
-  )
 
 (find-file "~/Notes/Projects.org")
 (setq initial-buffer-choice "~/Notes/Projects.org")
