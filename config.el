@@ -127,6 +127,11 @@
 
                                 ))
 
+  (setq org-roam-capture-templates '(("d" "default" plain "%?"
+                                      :target (file+head "roam/%<%Y%m%d%H%M%S>-${slug}.org"
+                                                         "#+title: ${title}\n")
+                                      :unnarrowed t)))
+
   (setq org-refile-targets '(("~/Notes/Actions.org" :level . 2)
                              ("~/Notes/Projects.org" :maxlevel . 3)))
 
