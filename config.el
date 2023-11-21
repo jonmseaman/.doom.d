@@ -120,10 +120,10 @@
 
   (setq org-capture-templates `(("n" "Note [INBOX in Quick Notes.org]" entry
                                  (file+headline "~/Notes/Quick Notes.org" "INBOX")
-                                 "* %i%?")
+                                 "* %i%?" :prepend t)
                                 ("t" "Todo [INBOX in Quick Notes.org]" entry
                                  (file+headline "~/Notes/Quick Notes.org" "INBOX")
-                                 "* TODO %i%?")
+                                 "* TODO %i%?" :prepend t)
                                 ("j" "Journal Entry [Journal.org]" entry
                                  (file "~/Notes/Journal.org")
                                  ,(concat "* %i%?\n"
