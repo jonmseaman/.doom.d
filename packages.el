@@ -59,3 +59,6 @@
 
 (package! org-super-links
           :recipe (:host github :repo "toshism/org-super-links" :branch "develop"))
+
+(unpin! org-roam)
+(package! org-roam-ui)

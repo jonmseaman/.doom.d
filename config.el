@@ -1,9 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Jon Seaman"
@@ -100,7 +96,7 @@
 (after! org
   (setq org-directory "~/Notes/"
         org-agenda-files '("~/Notes/Actions.org" "~/Notes/Projects.org")
-        org-default-notes-file (expand-file-name "Actions.org" org-directory)
+        org-default-notes-file (expand-file-name "Quick Notes.org" org-directory)
         org-log-done 'time
         org-agenda-start-with-follow-mode t
         org-agenda-follow-indirect t
@@ -256,6 +252,20 @@
 ;; The command org-id-update-id-locations will then be able to update all ids.
 (require 'org-id)
 (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+
+(defun org-id-update-id-locations-recursive()
+  "Calls org-id-update-id-locations with all org files in ~/Notes"
+  (interactive)
+
+  (defun is-not-hidden-dir (dir)
+    (not (string-search "/." dir)))
+
+  (setq org-files (directory-files-recursively
+    "~/Notes" "\.org$" nil 'is-not-hidden-dir))
+
+  (org-id-update-id-locations org-files)
+  )
+
 (use-package! org-super-links
   :custom (org-super-links :type git :host github :repo "toshism/org-super-links" :branch "develop")
   :bind (("C-c s s" . org-super-links-link)
@@ -309,3 +319,15 @@
 
 (find-file "~/Notes/Projects.org")
 (setq initial-buffer-choice "~/Notes/Projects.org")
+
+;; Instructions pulled from org-roam docs for setting up the UI.
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
