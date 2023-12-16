@@ -133,7 +133,7 @@
                                 ))
 
   (setq org-roam-capture-templates '(("d" "default" plain "%?"
-                                      :target (file+head "roam/%<%Y%m%d%H%M%S>-${slug}.org"
+                                      :target (file+head "0_Inbox/%<%Y%m%d%H%M%S>-${slug}.org"
                                                          "#+title: ${title}\n")
                                       :unnarrowed t)))
 
