@@ -245,6 +245,8 @@
            )
           )
         )
+
+
   )
 
 ;; org-id-link-to-org-user-id causes org-super-links to use ids rather than the
@@ -279,6 +281,20 @@
 
 (setq! org-cite-global-bibliography
  '("~/Notes/bibliography.bib"))
+
+
+(require 'ox-publish)
+(setq org-publish-project-alist
+'(
+    ("org-notes"
+     :base-directory "~/org/"
+     :base-extension "org"
+     :publishing-directory "~/public_html/" :recursive t :publishing-function org-html-publish-to-html
+     :headline-levels 4             ; Just the default for this project.
+     :auto-preamble t
+     )
+
+))
 
 (setq scroll-step 1)
 (setq scroll-margin 7)
