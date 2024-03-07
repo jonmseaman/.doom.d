@@ -279,6 +279,7 @@
   (org-mouse-features
    '(context-menu move-tree yank-link activate-stars activate-bullets activate-checkboxes)))
 
+(setq! citar-bibliography '("~/Notes/bibliography.bib"))
 (setq! org-cite-global-bibliography
  '("~/Notes/bibliography.bib"))
 
