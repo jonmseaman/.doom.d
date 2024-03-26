@@ -334,9 +334,6 @@
 
    (find-file filename))
 
-(find-file "~/Notes/Projects.org")
-(setq initial-buffer-choice "~/Notes/Projects.org")
-
 ;; Instructions pulled from org-roam docs for setting up the UI.
 (use-package! websocket
     :after org-roam)
