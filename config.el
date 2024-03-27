@@ -5,31 +5,6 @@
 (setq user-full-name "Jon Seaman"
       user-mail-address "jonmseaman@live.com")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -70,11 +45,10 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;; Enable the GUI
 
+;; Enable the GUI
 ;; Menu bar makes org-mode and other feature much more discoverable.
 (menu-bar-mode 1)
-(scroll-bar-mode 1)
 
 
 ;; Adapted from: https://stackoverflow.com/questions/17215868/recursively-adding-org-files-in-a-top-level-directory-for-org-agenda-files-take
@@ -137,8 +111,7 @@
                                                          "#+title: ${title}\n")
                                       :unnarrowed t)))
 
-  (setq org-refile-targets '(("~/Notes/Actions.org" :level . 2)
-                             ("~/Notes/Projects.org" :maxlevel . 3)))
+  (setq org-refile-targets '(("~/Notes/Projects.org" :maxlevel . 3)))
 
   (setq org-src-preserve-indentation nil
         org-src-tab-acts-natively t
@@ -300,18 +273,11 @@
 (setq scroll-step 1)
 (setq scroll-margin 7)
 
-;; Save open buffers and window positions.
-;; (desktop-save-mode 1)
-
 ;; Always use unix line endings
 (setq-default buffer-file-coding-system 'utf-8-unix)
 
 ;; Save buffers to their real file on auto-save.
 (auto-save-visited-mode +1)
-
-;; Make the first frame maximized when starting emacs.
-;; Source: https://emacs.stackexchange.com/questions/2999/how-to-maximize-my-emacs-frame-on-start-up
-;;(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; Turn auto complete off by default because it is annoying and not generally
 ;; needed for note taking.
@@ -345,3 +311,8 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
+
+
+(after! treemacs
+  (setq treemacs-show-hidden-files nil)
+)
