@@ -316,3 +316,7 @@
 (after! treemacs
   (setq treemacs-show-hidden-files nil)
 )
+
+;; Default to splitting to the right and below, which is much more intuitive.
+(map! :desc "Split window" :n "C-w s" #'+evil/window-split-and-follow)
+(map! :desc "Vertical split window" :n "C-w v" #'+evil/window-vsplit-and-follow)
