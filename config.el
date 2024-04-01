@@ -46,13 +46,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; Enable the GUI
-;; Menu bar makes org-mode and other feature much more discoverable.
-(menu-bar-mode 1)
-
-
 ;; Adapted from: https://stackoverflow.com/questions/17215868/recursively-adding-org-files-in-a-top-level-directory-for-org-agenda-files-take
-
 (defun org-get-agenda-files-recursively (dir)
   "Get org agenda files from root DIR."
   (directory-files-recursively dir "\.org$"))
@@ -282,9 +276,6 @@
 ;; Turn auto complete off by default because it is annoying and not generally
 ;; needed for note taking.
 (+company/toggle-auto-completion)
-
-;; Enables smooth scrolling.
-;; (pixel-scroll-mode) ;; Disabled because it sometimes causes a ton of lag.
 
 ;; Weekly Notes Function
 (defun goto-weekly-note ()
