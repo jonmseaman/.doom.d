@@ -250,6 +250,8 @@
 (setq! org-cite-global-bibliography
  '("~/Notes/bibliography.bib"))
 
+(setq! org-plantuml-jar-path '"~/bin/plantuml.jar")
+
 
 (require 'ox-publish)
 (setq org-publish-project-alist
