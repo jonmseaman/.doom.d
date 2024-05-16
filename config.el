@@ -254,7 +254,18 @@
 (setq! org-cite-global-bibliography
  '("~/Notes/bibliography.bib"))
 
-(setq! org-plantuml-jar-path '"~/bin/plantuml.jar")
+(defun set-variable-to-existing-path (variable &rest paths)
+  "Set VARIABLE to the first existing path from PATHS."
+  (let ((existing-path (cl-find-if #'file-exists-p paths)))
+    (if existing-path
+        (set variable existing-path)
+      (message "None of the paths exist"))))
+
+;; Set plant uml path, which could be in different locations depending on what
+;; machine I'm using.
+(set-variable-to-existing-path 'org-plantuml-jar-path
+                                "~/bin/plantuml.jar"  ;; Work pc location.
+                                "/usr/share/java/plantuml.jar") ;; Installed location
 
 
 (require 'ox-publish)
