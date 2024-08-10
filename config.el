@@ -58,16 +58,16 @@
 (defun org-set-agenda-files-recursively (dir)
   "Set org-agenda files from root DIR."
   (setq org-agenda-files
-    (org-get-agenda-files-recursively dir)))
+        (org-get-agenda-files-recursively dir)))
 
 (defun org-add-agenda-files-recursively (dir)
   "Add org-agenda files from root DIR."
   (nconc org-agenda-files
-    (org-get-agenda-files-recursively dir)))
+         (org-get-agenda-files-recursively dir)))
 
 (after! org
   (setq org-directory "~/Notes/"
-        org-agenda-files '("~/Notes/Actions.org" "~/Notes/Projects.org")
+        org-agenda-files '("~/Notes/Projects.org")
         org-default-notes-file (expand-file-name "Quick Notes.org" org-directory)
         org-log-done 'time
         org-agenda-start-with-follow-mode t
@@ -86,13 +86,13 @@
   ;; will appear in the agenda still.
   (org-add-agenda-files-recursively "~/Notes/1_Projects")
 
-  (setq org-capture-templates `(("n" "Note [INBOX in Quick Notes.org]" entry
+  (setq org-capture-templates `(("n" "Note in Quick Notes.org" entry
                                  (file+headline "~/Notes/Quick Notes.org" "INBOX")
                                  "* %i%?" :prepend t)
-                                ("t" "Todo [INBOX in Quick Notes.org]" entry
+                                ("t" "Todo in Quick Notes.org" entry
                                  (file+headline "~/Notes/Quick Notes.org" "INBOX")
                                  "* TODO %i%?" :prepend t)
-                                ("j" "Journal Entry [Journal.org]" entry
+                                ("j" "Journal Entry" entry
                                  (file "~/Notes/Journal.org")
                                  ,(concat "* %i%?\n"
                                           ":PROPERTIES:\n"
@@ -105,21 +105,16 @@
                                 ))
 
   (setq org-roam-capture-templates '(("d" "default" plain "%?"
-                                      :target (file+head "0_Inbox/%<%Y%m%d%H%M%S>-${slug}.org"
+                                      :target (file+head "0_Inbox/${slug}.org"
                                                          "#+title: ${title}\n")
-                                      :unnarrowed t)))
+                                      :unnarrowed t
+                                      :jump-to-captured t)))
 
-  (setq org-refile-targets '(("~/Notes/Projects.org" :maxlevel . 3)))
+  (setq org-refile-targets '(("~/Notes/Projects.org" :maxlevel . 2)))
 
   (setq org-src-preserve-indentation nil
         org-src-tab-acts-natively t
         org-edit-src-content-indentation 0)
-
-  (with-no-warnings
-    (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
-    (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
-    (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
-    )
 
   ;; Pulled from default doom config.
   ;; I simplified it and changed the KILL to look the same as DONE.
@@ -147,8 +142,8 @@
           ("EPIC" . +org-todo-project)
           ("MILESTONE" . +org-todo-project)
           ("STORY" . +org-todo-project))
-
         )
+
   (setq org-stuck-projects '("+active+LEVEL=2/+PROJ|EPIC|MILESTONE|STORY-DONE-KILL" ("NEXT" "TODO") nil ""))
 
   ;; org-agenda-custom-commands, partially adopted from:
@@ -196,10 +191,10 @@
                         ))
             ;; Current Tasks
             (tags-todo "active" ((org-agenda-overriding-header "\nCurrent Tasks\n")
-                        (org-agenda-hide-tags-regexp "active")
-                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "LOOP" "PROG")))
-                        (org-agenda-dim-blocked-tasks 'invisible)
-                        ))
+                                 (org-agenda-hide-tags-regexp "active")
+                                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "LOOP" "PROG")))
+                                 (org-agenda-dim-blocked-tasks 'invisible)
+                                 ))
 
             ;; Current Projects
             (tags-todo "active"
@@ -234,7 +229,7 @@
     (not (string-search "/." dir)))
 
   (setq org-files (directory-files-recursively
-    "~/Notes" "\.org$" nil 'is-not-hidden-dir))
+                   "~/Notes" "\.org$" nil 'is-not-hidden-dir))
 
   (org-id-update-id-locations org-files)
   )
@@ -252,7 +247,7 @@
 
 (setq! citar-bibliography '("~/Notes/bibliography.bib"))
 (setq! org-cite-global-bibliography
- '("~/Notes/bibliography.bib"))
+       '("~/Notes/bibliography.bib"))
 
 (defun set-variable-to-existing-path (variable &rest paths)
   "Set VARIABLE to the first existing path from PATHS."
@@ -264,22 +259,22 @@
 ;; Set plant uml path, which could be in different locations depending on what
 ;; machine I'm using.
 (set-variable-to-existing-path 'org-plantuml-jar-path
-                                "~/bin/plantuml.jar"  ;; Work pc location.
-                                "/usr/share/java/plantuml.jar") ;; Installed location
+                               "~/bin/plantuml.jar"  ;; Work pc location.
+                               "/usr/share/java/plantuml.jar") ;; Installed location
 
 
 (require 'ox-publish)
 (setq org-publish-project-alist
-'(
-    ("org-notes"
-     :base-directory "~/Notes/"
-     :base-extension "org"
-     :publishing-directory "~/public_html/" :recursive t :publishing-function org-html-publish-to-html
-     :headline-levels 4             ; Just the default for this project.
-     :auto-preamble t
-     )
+      '(
+        ("org-notes"
+         :base-directory "~/Notes/"
+         :base-extension "org"
+         :publishing-directory "~/public_html/" :recursive t :publishing-function org-html-publish-to-html
+         :headline-levels 4             ; Just the default for this project.
+         :auto-preamble t
+         )
 
-))
+        ))
 
 (setq scroll-step 1)
 (setq scroll-margin 7)
@@ -292,7 +287,7 @@
 
 ;; Turn auto complete off by default because it is annoying and not generally
 ;; needed for note taking.
-(+company/toggle-auto-completion)
+;; (+company/toggle-auto-completion)
 
 ;; Weekly Notes Function
 (defun goto-weekly-note ()
@@ -300,30 +295,26 @@
   (interactive)
   (setq filename (concat "~/Notes/0_Inbox/" (format-time-string "%Y-Week-%U") ".org"))
 
-   ;; Maybe create the file from a template.
-   (unless (file-exists-p filename)
-       ;; Create file from template.
-       (setq template (format-time-string "* %Y Week %U%n"))
-       (write-region template nil filename))
+  ;; Maybe create the file from a template.
+  (unless (file-exists-p filename)
+    ;; Create file from template.
+    (setq template (format-time-string "* %Y Week %U%n"))
+    (write-region template nil filename))
 
-   (find-file filename))
+  (find-file filename))
 
 ;; Instructions pulled from org-roam docs for setting up the UI.
 (use-package! websocket
-    :after org-roam)
+  :after org-roam)
 
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  :after org-roam ;; or :after org
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start nil))
 
-
-(after! treemacs
-  (setq treemacs-show-hidden-files nil)
-)
 
 ;; Default to splitting to the right and below, which is much more intuitive.
 (map! :desc "Split window" :n "C-w s" #'+evil/window-split-and-follow)
