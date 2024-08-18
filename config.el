@@ -304,9 +304,15 @@
   (find-file filename))
 
 ;; Bring up a file in my Notes.
-;; This makes it
-(find-file "~/Notes/Projects.org")
-(setq initial-buffer-choice "~/Notes/Projects.org")
+;; Since this is almost always what I use Emacs for, this is much more
+;; convenient.
+;; Also, this only switches buffers if a file was not specified on the
+;; command line.
+(setq initial-buffer-choice
+      (lambda ()
+        (if (buffer-file-name)
+            (current-buffer)
+          (find-file "~/Notes/Projects.org"))))
 
 ;; Instructions pulled from org-roam docs for setting up the UI.
 (use-package! websocket
