@@ -303,6 +303,11 @@
 
   (find-file filename))
 
+;; Bring up a file in my Notes.
+;; This makes it
+(find-file "~/Notes/Projects.org")
+(setq initial-buffer-choice "~/Notes/Projects.org")
+
 ;; Instructions pulled from org-roam docs for setting up the UI.
 (use-package! websocket
   :after org-roam)
