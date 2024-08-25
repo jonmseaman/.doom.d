@@ -346,3 +346,8 @@
 ;; Default to splitting to the right and below, which is much more intuitive.
 (map! :desc "Split window" :n "C-w s" #'+evil/window-split-and-follow)
 (map! :desc "Vertical split window" :n "C-w v" #'+evil/window-vsplit-and-follow)
+
+;; Ignore hidden files in neotree by default.
+;; The builtin version of this feature didn't work for me as of Aug, 2024.
+(add-to-list 'neo-hidden-regexp-list "^\\.")
+(setq neo-show-hidden-files nil)
