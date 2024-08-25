@@ -88,10 +88,20 @@
 
   (setq org-capture-templates `(("n" "Note in Quick Notes.org" entry
                                  (file+headline "~/Notes/Quick Notes.org" "INBOX")
-                                 "* %i%?" :prepend t)
+                                 ,(concat "* %i%?\n"
+                                          ":PROPERTIES:\n"
+                                          ":CREATED: %<%a %b %e %R %Y>\n"
+                                          ":END:\n"
+                                          "\n")
+                                 :prepend t)
                                 ("t" "Todo in Quick Notes.org" entry
                                  (file+headline "~/Notes/Quick Notes.org" "INBOX")
-                                 "* TODO %i%?" :prepend t)
+                                 ,(concat "* TODO %i%?\n"
+                                          ":PROPERTIES:\n"
+                                          ":CREATED: %<%a %b %e %R %Y>\n"
+                                          ":END:\n"
+                                          "\n")
+                                 :prepend t)
                                 ("j" "Journal Entry" entry
                                  (file "~/Notes/Journal.org")
                                  ,(concat "* %i%?\n"
@@ -104,8 +114,14 @@
                                           "-\n") :prepend t)
                                 ))
 
-  (setq org-roam-capture-templates '(("d" "default" plain "%?"
-                                      :target (file+head "0_Inbox/${slug}.org"
+  (setq org-roam-capture-templates `(("d" "default" plain
+                                      ,(concat "* %i%?\n"
+                                               ":PROPERTIES:\n"
+                                               ":CREATED: %<%a %b %e %R %Y>\n"
+                                               ":END:\n"
+                                               "\n")
+                                      ;; Use {title} instead of {slug} for prettier names.
+                                      :target (file+head "0_Inbox/${title}.org"
                                                          "#+title: ${title}\n")
                                       :unnarrowed t
                                       :jump-to-captured t)))
