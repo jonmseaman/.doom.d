@@ -76,6 +76,11 @@
         org-todo-repeat-to-state "LOOP"
         org-agenda-todo-ignore-scheduled 'future
         org-agenda-tags-todo-honor-ignore-options t
+        ;; These two variables make it so the file is indented using spaces
+        ;; inside the file. In other words, the indentation will appear in all
+        ;; files.
+        org-adapt-indentation t
+        org-startup-indented nil
         )
 
   ;; Configure org-roam
