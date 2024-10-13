@@ -236,6 +236,14 @@
 
   )
 
+;; This will auto-wrap lines in org files with physical newlines and spaces,
+;; instead of me having to press ~gq~ all the time.
+;; Alternatively, this could be done just for org-mode files.
+;; (add-hook 'org-mode-hook 'auto-fill-mode)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+
+
 ;; org-id-link-to-org-user-id causes org-super-links to use ids rather than the
 ;; path to the linked note, which makes it easier to maintain.
 ;; The command org-id-update-id-locations will then be able to update all ids.
