@@ -364,3 +364,10 @@
 ;; The builtin version of this feature didn't work for me as of Aug, 2024.
 (add-to-list 'neo-hidden-regexp-list "^\\.")
 (setq neo-show-hidden-files nil)
+
+;; (after! hl-todo
+;;   (setq hl-todo-keyword-faces
+;; 	`(("TODO" . "#ff0000")
+;; 	  ("DONE" . ,(face-foreground 'font-lock-comment-face)))))
+
+;; (global-hl-todo-mode 1)
