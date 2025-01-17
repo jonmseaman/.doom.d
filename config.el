@@ -370,4 +370,6 @@
 ;; 	`(("TODO" . "#ff0000")
 ;; 	  ("DONE" . ,(face-foreground 'font-lock-comment-face)))))
 
-;; (global-hl-todo-mode 1)
+(global-hl-todo-mode 1)
+
+(setq emacsql-sqlite-executable "/usr/bin/sqlite3")
