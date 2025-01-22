@@ -372,4 +372,4 @@
 
 (global-hl-todo-mode 1)
 
-(setq emacsql-sqlite-executable "/usr/bin/sqlite3")
+;; (setq emacsql-sqlite-executable "/usr/bin/sqlite3")
