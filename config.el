@@ -9,6 +9,8 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(setq doom-theme 'doom-monokai-classic)
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Notes/")
@@ -53,7 +55,8 @@
 ;; Adapted from: https://stackoverflow.com/questions/17215868/recursively-adding-org-files-in-a-top-level-directory-for-org-agenda-files-take
 (defun org-get-agenda-files-recursively (dir)
   "Get org agenda files from root DIR."
-  (directory-files-recursively dir "\.org$"))
+  (when (file-directory-p dir)
+    (directory-files-recursively dir "\.org$")))
 
 (defun org-set-agenda-files-recursively (dir)
   "Set org-agenda files from root DIR."
@@ -264,7 +267,6 @@
   )
 
 (use-package! org-super-links
-  :custom (org-super-links :type git :host github :repo "toshism/org-super-links" :branch "develop")
   :bind (("C-c s s" . org-super-links-link)
          ("C-c s l" . org-super-links-store-link)
          ("C-c s C-l" . org-super-links-insert-link)))
@@ -339,7 +341,8 @@
 ;; command line.
 (setq initial-buffer-choice
       (lambda ()
-        (if (buffer-file-name)
+        (if (or (buffer-file-name)
+                (not (file-exists-p "~/Notes/Projects.org")))
             (current-buffer)
           (find-file "~/Notes/Projects.org"))))
 
@@ -362,8 +365,9 @@
 
 ;; Ignore hidden files in neotree by default.
 ;; The builtin version of this feature didn't work for me as of Aug, 2024.
-(add-to-list 'neo-hidden-regexp-list "^\\.")
-(setq neo-show-hidden-files nil)
+(after! neotree
+  (add-to-list 'neo-hidden-regexp-list "^\\.")
+  (setq neo-show-hidden-files nil))
 
 ;; (after! hl-todo
 ;;   (setq hl-todo-keyword-faces
